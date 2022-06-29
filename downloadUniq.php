@@ -1,5 +1,15 @@
 <?php 
-//echo $_POST['Link'];
+$m_strHost = "localhost";
+$m_strDbName = "ultra_tools";
+$m_strLogin = "root";
+$m_strPwd = "";
+
+$m_Mysql = null;
+  
+$m_Mysql = mysqli_connect($m_strHost, $m_strLogin, $m_strPwd, $m_strDbName);
+$m_Mysql->set_charset("utf8mb4");
+
+
 print_r($_POST);
 $url = $_POST['Link'];
       
@@ -23,4 +33,14 @@ $url = $_POST['Link'];
     else{
     	echo "wola ça a raté ";
     }
+
+    $strJsonFileContents = file_get_contents("unzip/$_POST[Id]/manifest.json");
+    $json = json_decode($strJsonFileContents,true);
+    $collectionName = $json['subName'];
+    $description = $json['description'];
+    $id=$_POST['Id'];
+    echo $strQuery = "INSERT INTO `tokenfactory`(`Id`, `CollectionName`, `Description`) VALUES ($id,`$collectionName`,`$description`)";
+        //echo $strQuery;
+    mysqli_query($m_Mysql, $strQuery);
+
 ?>

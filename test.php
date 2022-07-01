@@ -67,7 +67,7 @@
 			data.rows.forEach(data=>{
 				$.ajax({
 					type: 'POST',
-					url:  'downloadUniq.php',
+					url:  'script/downloadUniq.php',
 					dataType: 'json',
 					data: {
 						Link: data['meta_uris'][0],

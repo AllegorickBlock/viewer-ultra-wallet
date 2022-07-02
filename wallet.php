@@ -9,6 +9,7 @@
     <input type="text" id="address">
     <button id="getWallet">Get Wallet</button>
     <div id='wallet'></div>
+    <div id='UOS'></div>
     <div id='uniq'></div>
   </body>
 </html>
@@ -54,6 +55,17 @@
                       }
                     })
 
+                }
+        })
+        $.ajax({
+                type: 'POST',
+                url:  'https://uos.eosusa.news/v1/chain/get_account',
+                dataType: 'json',
+                data: JSON.stringify({
+                      "account_name": wallet
+                  }),
+                success: function (data) {
+                  $("#UOS").text("Bag of ᕫ : "+data['core_liquid_balance']);
                 }
         })
   });

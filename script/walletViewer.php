@@ -19,6 +19,13 @@ foreach ($data['rows'] as $uniq) {
     $result = mysqli_query($m_Mysql, $strQuery);
     while ($row = mysqli_fetch_row($result)) {
         $data['rows'][$i]['CollectionName']=$row[1];
+        $data['rows'][$i]['Name']=$row[2];
+        $data['rows'][$i]['Description']=$row[3];
+        $data['rows'][$i]['Product']=$row[4];
+        $data['rows'][$i]['Square']=$row[5];
+        $data['rows'][$i]['Hero']=$row[6];
+        $data['rows'][$i]['Type']=$row[7];
+
     }
 
 

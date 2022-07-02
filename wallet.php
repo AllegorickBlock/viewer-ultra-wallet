@@ -6,42 +6,51 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
   <body>
-    Wallet
+    <div id='wallet'></div>
+    <div id='uniq'></div>
   </body>
 </html>
 <script>
-  $.ajax({
-    type: 'POST',
-    url:  'https://api.ultra.eossweden.org/v1/chain/get_table_rows',
-    dataType: 'json',
-    data: JSON.stringify({
-          "code": "eosio.nft.ft",
-          "table": "token.a",
-          "scope": "gg1sj2uj3cd4",
-          "json": true,
-          "limit":50
-      }),
-    success: function (data) {
-      console.log(data);
-      
+  $(document).ready(
+      function(){
+        var wallet = "gg1sj2uj3cd4";
+        $("#wallet").text("Wallet of "+wallet);
         $.ajax({
-          type: 'POST',
-          url:  'script/walletViewer.php',
-          dataType: 'json',
-          data: {
-            data:data
-          },
-          success: function (data) {
+                type: 'POST',
+                url:  'https://api.ultra.eossweden.org/v1/chain/get_table_rows',
+                dataType: 'json',
+                data: JSON.stringify({
+                      "code": "eosio.nft.ft",
+                      "table": "token.a",
+                      "scope": wallet,
+                      "json": true,
+                      "limit":50
+                  }),
+                success: function (data) {
+                  console.log(data);
+                    $('wallet').text('test');
+                    $.ajax({
+                      type: 'POST',
+                      url:  'script/walletViewer.php',
+                      dataType: 'json',
+                      data: {
+                        data:data
+                      },
+                      success: function (data) {
+                        var tab ='';
+                        data.forEach(data=>{
+                          tab +='<img src="unzip/'+data.token_factory_id+'/'+data.Product+'" width="150" height="150"/>';
 
-          }
-        })  
-      
-      //console.log(data['rows'][0]['meta_uris'][0]);
-      
-  
-    }
-  })
+                        })
+                        $("#uniq").html(tab);
+                      }
+                    })
 
+                }
+      })
+
+
+})
 
 
 </script>

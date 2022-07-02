@@ -6,6 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
   <body>
+    <input type="text" id="address">
+    <button id="getWallet">Get Wallet</button>
     <div id='wallet'></div>
     <div id='uniq'></div>
   </body>
@@ -13,7 +15,13 @@
 <script>
   $(document).ready(
       function(){
-        var wallet = "gg1sj2uj3cd4";
+        
+
+
+})
+
+  $("#getWallet").click(function() {
+    var wallet = $("#address").val();
         $("#wallet").text("Wallet of "+wallet);
         $.ajax({
                 type: 'POST',
@@ -47,10 +55,8 @@
                     })
 
                 }
-      })
-
-
-})
+        })
+  });
 
 
 </script>
